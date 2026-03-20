@@ -472,12 +472,10 @@ section {
 
 .brands-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 1.5rem;
   justify-items: center;
   align-items: center;
-  max-width: 700px;
-  margin: 0 auto;
 }
 
 .brand-card {
@@ -490,7 +488,13 @@ section {
   cursor: pointer;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
+  .brands-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
   .brands-grid {
     grid-template-columns: repeat(2, 1fr);
   }
