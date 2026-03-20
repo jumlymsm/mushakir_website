@@ -503,15 +503,19 @@ section {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-.brand-logo-box svg {
+.brand-logo-box svg,
+.brand-logo-box img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
   color: var(--muted);
-  transition: color 0.3s;
+  transition: color 0.3s, filter 0.3s;
 }
 
-.brand-card:hover .brand-logo-box svg {
+.brand-card:hover .brand-logo-box svg,
+.brand-card:hover .brand-logo-box img {
   color: var(--fg);
+  filter: brightness(1.05);
 }
 
 .brand-name {
