@@ -499,7 +499,7 @@ section {
 .brand-logo-box {
   width: 110px;
   height: 110px;
-  background: var(--card);
+  background: #ffffff;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   display: flex;
@@ -524,8 +524,7 @@ section {
 }
 
 .brand-logo-box img {
-  filter: brightness(0) invert(1);
-  opacity: 0.85;
+  filter: none;
 }
 
 .brand-card:hover .brand-logo-box svg,
