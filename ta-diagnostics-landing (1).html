@@ -6,7 +6,230 @@
   <title>T&A Diagnostics — Expert Motor, Electrical & Electronic Troubleshooting</title>
   <meta name="description" content="T&A Diagnostics specialises in motor mechanic, electrical and electronic troubleshooting. Expert in Toyota, Nissan, Mazda, BMW, Mercedes-Benz, Kia, Hyundai and hybrid battery." />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0b0f1a;
+      --bg2: #0e1322;
+      --card: #111827;
+      --border: #1f2d45;
+      --primary: #e8321e;
+      --primary-dark: #c42a18;
+      --fg: #f1f5f9;
+      --muted: #8294a8;
+      --font-sans: 'Inter', sans-serif;
+      --font-display: 'Montserrat', sans-serif;
+      --radius: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); line-height: 1.6; }
+    h1,h2,h3,h4,h5,h6 { font-family: var(--font-display); font-weight: 800; line-height: 1.15; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAVBAR */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(11,15,26,0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+    .nav-logo-icon {
+      width: 42px; height: 42px; background: var(--primary); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nav-logo-icon svg { width: 22px; height: 22px; color: #fff; }
+    .nav-brand { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; letter-spacing: -0.02em; }
+    .nav-brand span { color: var(--primary); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--muted); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--fg); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 0.65rem 1.5rem; border-radius: 50px; font-weight: 700;
+      font-family: var(--font-display); font-size: 0.9rem; cursor: pointer;
+      border: none; transition: all 0.2s; text-decoration: none;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(232,50,30,0.35); }
+    .btn-outline { background: transparent; color: var(--fg); border: 1.5px solid var(--border); }
+    .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 120px 2rem 80px;
+      background: radial-gradient(ellipse at 70% 50%, rgba(232,50,30,0.07) 0%, transparent 60%),
+                  linear-gradient(135deg, var(--bg) 0%, #0a0d18 100%);
+      position: relative; overflow: hidden;
+    }
+    .grid-bg {
+      position: absolute; inset: 0; opacity: 0.08;
+      background-size: 40px 40px;
+      background-image: linear-gradient(to right, #fff 1px, transparent 1px),
+                        linear-gradient(to bottom, #fff 1px, transparent 1px);
+    }
+    .hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(232,50,30,0.1); border: 1px solid rgba(232,50,30,0.3);
+      color: var(--primary); padding: 6px 16px; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 600; margin-bottom: 1.5rem; letter-spacing: 0.03em;
+    }
+    .hero h1 { font-size: clamp(3.5rem, 7vw, 5.5rem); color: var(--fg); margin-bottom: 1rem; }
+    .hero h1 .red { color: var(--primary); display: block; }
+    .hero-tagline { font-size: clamp(1.1rem, 2vw, 1.4rem); color: rgba(241,245,249,0.8); font-weight: 600; margin-bottom: 1rem; }
+    .hero-desc { color: var(--muted); font-size: 1rem; max-width: 520px; margin-bottom: 2.5rem; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* SECTION SHARED */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-label { color: var(--primary); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .section-title { font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 1rem; }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+
+    /* SLIDER */
+    .slider-section { background: var(--bg); padding: 4rem 2rem; }
+    .slider-wrap {
+      max-width: 1200px; margin: 0 auto;
+      position: relative; border-radius: 18px; overflow: hidden;
+      height: 500px; box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+    }
+    .slide {
+      position: absolute; inset: 0; opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .slide.active { opacity: 1; }
+    .slide img { width: 100%; height: 100%; object-fit: cover; }
+    .slide-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+    }
+    .slide-content { position: absolute; bottom: 2.5rem; left: 2.5rem; right: 2.5rem; }
+    .slide-tag {
+      display: inline-block; background: var(--primary); color: #fff;
+      font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 50px; margin-bottom: 0.75rem;
+    }
+    .slide-title { font-size: clamp(1.6rem, 3vw, 2.4rem); color: #fff; margin-bottom: 0.4rem; }
+    .slide-sub { color: rgba(255,255,255,0.75); font-size: 1rem; }
+    .slider-btn {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s; font-size: 1.2rem;
+    }
+    .slider-btn:hover { background: var(--primary); border-color: var(--primary); }
+    .slider-prev { left: 1rem; }
+    .slider-next { right: 1rem; }
+    .slider-dots {
+      position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 8px; z-index: 10;
+    }
+    .dot {
+      width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4);
+      cursor: pointer; transition: all 0.3s; border: none;
+    }
+    .dot.active { width: 28px; border-radius: 4px; background: var(--primary); }
+
+    /* SERVICES */
+    .services-section { background: var(--bg2); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+    .service-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 2rem; transition: all 0.3s;
+    }
+    .service-card:hover { border-color: rgba(232,50,30,0.4); transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+    .service-icon {
+      width: 52px; height: 52px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem; transition: background 0.3s, border-color 0.3s;
+    }
+    .service-card:hover .service-icon { background: var(--primary); border-color: var(--primary); }
+    .service-icon svg { width: 24px; height: 24px; color: var(--primary); transition: color 0.3s; }
+    .service-card:hover .service-icon svg { color: #fff; }
+    .service-card h3 { font-size: 1.15rem; margin-bottom: 0.75rem; }
+    .service-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+    /* BRANDS */
+    .brands-section { background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .brands-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
+    .brand-card {
+      display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+      cursor: pointer; group: true;
+    }
+    .brand-logo-box {
+      width: 110px; height: 110px; background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem; transition: all 0.3s;
+    }
+    .brand-card:hover .brand-logo-box { border-color: rgba(232,50,30,0.5); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+    .brand-logo-box svg { width: 100%; height: 100%; color: var(--muted); transition: color 0.3s; }
+    .brand-card:hover .brand-logo-box svg { color: var(--fg); }
+    .brand-name { font-size: 0.82rem; font-weight: 600; color: var(--muted); transition: color 0.3s; font-family: var(--font-display); }
+    .brand-card:hover .brand-name { color: var(--primary); }
+
+    /* WHY US */
+    .whyus-section { background: var(--bg2); }
+    .whyus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .whyus-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1.75rem; display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .check-icon { width: 28px; height: 28px; color: var(--primary); flex-shrink: 0; margin-top: 2px; }
+    .whyus-card h4 { font-size: 1rem; margin-bottom: 0.4rem; }
+    .whyus-card p { color: var(--muted); font-size: 0.88rem; }
+
+    /* CONTACT */
+    .contact-section { background: var(--bg); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 2rem; } }
+    .contact-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; }
+    .contact-box h3 { font-size: 1.4rem; margin-bottom: 1.5rem; }
+    .contact-item { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.5rem; }
+    .contact-icon {
+      width: 44px; height: 44px; background: rgba(232,50,30,0.1); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .contact-icon svg { width: 20px; height: 20px; color: var(--primary); }
+    .contact-label { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.2rem; }
+    .contact-value { font-weight: 700; font-size: 1rem; }
+    .hours p { display: flex; justify-content: space-between; width: 220px; font-size: 0.9rem; margin-bottom: 4px; }
+    .hours .closed { color: var(--primary); }
+    label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 0.4rem; }
+    input, textarea, select {
+      width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      color: var(--fg); border-radius: 10px; padding: 0.75rem 1rem;
+      font-family: var(--font-sans); font-size: 0.9rem; outline: none;
+      transition: border-color 0.2s; margin-bottom: 1rem;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--primary); }
+    textarea { resize: vertical; min-height: 130px; }
+    select option { background: var(--card); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+    .btn-full { width: 100%; justify-content: center; padding: 1rem; font-size: 1rem; border-radius: 12px; }
+
+    /* FOOTER */
+    footer {
+      background: #07090f; border-top: 1px solid var(--border);
+      padding: 2rem; text-align: center; color: var(--muted); font-size: 0.85rem;
+    }
+    footer strong { color: var(--primary); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero h1 { font-size: 2.8rem; }
+    }
+  </style>
 </head>
 <body>
 
@@ -329,6 +552,49 @@
   <p>&copy; 2026 <strong>T&amp;A Diagnostics</strong>. All rights reserved. Expert Motor, Electrical &amp; Electronic Troubleshooting.</p>
 </footer>
 
-<script src="script.js"></script>
+<script>
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('dots');
+  let timer;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsContainer.appendChild(d);
+  });
+
+  function updateSlider() {
+    slides.forEach((s, i) => s.classList.toggle('active', i === current));
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function changeSlide(dir) {
+    current = (current + dir + slides.length) % slides.length;
+    updateSlider();
+    resetTimer();
+  }
+
+  function goTo(index) {
+    current = index;
+    updateSlider();
+    resetTimer();
+  }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(() => changeSlide(1), 5000);
+  }
+
+  timer = setInterval(() => changeSlide(1), 5000);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    alert('Thank you! We will contact you shortly to confirm your appointment.');
+    e.target.reset();
+  }
+</script>
 </body>
 </html>
