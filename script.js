@@ -40,3 +40,14 @@ function handleSubmit(e) {
   alert('Thank you! We will contact you shortly to confirm your appointment.');
   e.target.reset();
 }
+
+// Fallback for broken brand logo urls
+window.addEventListener('load', () => {
+  document.querySelectorAll('.brand-logo-box img').forEach(img => {
+    img.onerror = () => {
+      img.onerror = null;
+      img.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iODAiIGhlaWdodD0iODAiIHJ4PSIxMiIgZmlsbD0iI0U4RTlGMiIvPgogIDx0ZXh0IHg9IjQwIiB5PSI0NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmaWxsPSIjMTMyMjUyIj5JbWFnZSBOb3QgRm91bmQ8L3RleHQ+Cjwvc3ZnPg==';
+      img.alt = 'No logo';
+    };
+  });
+});
